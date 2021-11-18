@@ -1,12 +1,18 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect ,useState} from 'react';
 import Link from "next/Link";
 
-const categories = [
-    {name: 'Shiz-real', slug: 'https://gist.github.com/adrianhajdin/2b2e8509a48229baf9bb9b53d4a31c91'},
-    {name: 'Hyatt', slug: 'https://gist.github.com/adrianhajdin/2b2e8509a48229baf9bb9b53d4a31c91'},
-]
+import { getCategories } from '../services';
+
 
 const Header = () => {
+
+    const [categories, setCategories] = useState([]);
+
+    useEffect(()=>{
+        getCategories()
+        .then((newCategories)=>{setCategories(newCategories)});
+    }, []);
+
     return (
         <div className = "container mx-auto px-10 mb-8">
             <div className = "border-b w-full inline-block border-blue-400 py-8">
